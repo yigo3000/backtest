@@ -46,6 +46,88 @@ def start_backtest(request):
 
     return HttpResponse(message)
 '''
+
+
+def _load_benchmark_portfolio_unit_net_value(file_name):
+    with open(file_name, 'rb') as f:
+        report = pickle.load(f)
+        x_axis = '['
+        for tmp in report['benchmark_portfolio'].index:
+            x_axis += '"' + str(tmp) + '"' + ', '
+        x_axis = x_axis[:-2] + ']'
+        y_axis = '['
+        for tmp in report['benchmark_portfolio']['unit_net_value']:
+            y_axis += str(tmp) + ', '
+        y_axis = y_axis[:-3] + ']'
+        response_json = '"benchmark_portfolio.unit_net_value":{"time":' + x_axis + ',\n"data":' + y_axis + '}'
+        return response_json
+def _load_portfolio_unit_net_value(file_name):
+    with open(file_name, 'rb') as f:
+        report = pickle.load(f)
+        x_axis = '['
+        for tmp in report['portfolio'].index:
+            x_axis += '"' + str(tmp) + '"' + ', '
+        x_axis = x_axis[:-2] + ']'
+        y_axis = '['
+        for tmp in report['portfolio']['unit_net_value']:
+            y_axis += str(tmp) + ', '
+        y_axis = y_axis[:-3] + ']'
+        response_json = '"portfolio_unit_net_value":{"time":' + x_axis + ',\n"data":' + y_axis + '}'
+    return response_json
+
+def _load_portfolio_delt_day_value(file_name):
+    with open(file_name, 'rb') as f:
+        report = pickle.load(f)
+        x_axis = '['
+        for tmp in report['portfolio'].index:
+            x_axis += '"' + str(tmp) + '"' + ', '
+        x_axis = x_axis[:-2] + ']'
+        y_axis = '['
+        for i in range(report['portfolio'].index.size):
+            if i == 0:
+                tmp = 0
+            else:
+                tmp = report['portfolio'].iloc[i, 3] - report['portfolio'].iloc[i - 1, 3]
+            y_axis += str(tmp) + ','
+        y_axis = y_axis[:-1] + ']'
+        response_json = '"portfolio_delt_day_value":{"time":' + x_axis + ',\n"data":' + y_axis + '}'
+        return response_json
+def _load_summary(file_name):
+    with open(file_name, 'rb') as f:
+        report = pickle.load(f)
+        response_json = '"summary":{'
+        for tmp in report['summary']:
+            response_json += '"' + tmp + '":"' + str(report['summary'][tmp]) + '",\n'
+        response_json = response_json[0:-2] + '}'
+    return response_json
+
+def _load_trades(file_name):
+    with open(file_name, 'rb') as f:
+        report = pickle.load(f)
+        tmp = '"trades":{'
+        for i in range(report['trades'].index.size):
+            tmp += '"' + report['trades'].index[i] + '":{'  # 时间
+            for j in range(report['trades'].columns.size):
+                tmp += '"' + report['trades'].columns[j] + '":"' + str(report['trades'].iloc[i, j]) + '",'  #
+            tmp = tmp[:-1] + '},\n'
+        tmp = tmp[:-2] + '}'
+    return tmp
+
+@csrf_exempt
+def get_result(request):
+    request.encoding = 'utf-8'
+    if request.method == "POST":
+        # if(request.POST['user id']=='demo' and request.POST['test id']=='demo'):
+        body = json.loads(str(request.body, encoding="utf-8"))
+        if (body['user id'] == 'demo' and body['test id'] == 'demo'):
+            response_json = '{'+_load_benchmark_portfolio_unit_net_value('report.pkl')+',\n'
+            response_json += _load_portfolio_unit_net_value('report.pkl') +',\n'
+            response_json += _load_portfolio_delt_day_value('report.pkl') +',\n'
+            response_json += _load_summary('report.pkl') +',\n'
+            response_json += _load_trades('report.pkl') + '}'
+            print(response_json)
+            return HttpResponse(response_json)
+
 @csrf_exempt
 def benchmark_portfolio_unit_net_value(request):
     request.encoding = 'utf-8'
