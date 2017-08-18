@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^portfolio/unit_net_value', backtest_views.portfolio_unit_net_value),
     url(r'^portfolio/delt_day_value', backtest_views.portfolio_delt_day_value),
     url(r'^summary', backtest_views.summary),
-    url(r'^trades', backtest_views.trades)
+    url(r'^trades', backtest_views.trades),
+    url(r'^get_result',backtest_views.get_result)
 ]
