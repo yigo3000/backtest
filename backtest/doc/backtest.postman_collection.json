@@ -1,0 +1,176 @@
+{
+	"variables": [],
+	"info": {
+		"name": "backtest",
+		"_postman_id": "97455d14-de6e-59a7-314d-1b4038520653",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取收益曲线",
+			"request": {
+				"url": "http://127.0.0.1:8000/portfolio/unit_net_value",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "获取收益曲线"
+			},
+			"response": []
+		},
+		{
+			"name": "获取指数曲线",
+			"request": {
+				"url": "http://127.0.0.1:8000/benchmark_portfolio/unit_net_value",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "获取指数曲线"
+			},
+			"response": []
+		},
+		{
+			"name": "获取每日盈亏",
+			"request": {
+				"url": "http://127.0.0.1:8000/portfolio/delt_day_value",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "获取每日盈亏"
+			},
+			"response": []
+		},
+		{
+			"name": "获取概况",
+			"request": {
+				"url": "http://127.0.0.1:8000/summary",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "获取交易情况",
+			"request": {
+				"url": "http://127.0.0.1:8000/trades",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,4 @@
+rqalpha
+TA-lib
+django-cors-headers
+django
