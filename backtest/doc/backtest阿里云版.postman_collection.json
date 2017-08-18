@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "backtest",
-		"_postman_id": "97455d14-de6e-59a7-314d-1b4038520653",
+		"name": "backtest阿里云版",
+		"_postman_id": "640c6226-4155-aaa5-dc20-3da51dbed93f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -10,7 +10,7 @@
 		{
 			"name": "获取收益曲线",
 			"request": {
-				"url": "http://127.0.0.1:8000/portfolio/unit_net_value",
+				"url": "http://47.94.98.165:7510/portfolio/unit_net_value",
 				"method": "POST",
 				"header": [
 					{
@@ -30,7 +30,7 @@
 		{
 			"name": "获取指数曲线",
 			"request": {
-				"url": "http://127.0.0.1:8000/benchmark_portfolio/unit_net_value",
+				"url": "http://47.94.98.165:7510/benchmark_portfolio/unit_net_value",
 				"method": "POST",
 				"header": [
 					{
@@ -50,7 +50,7 @@
 		{
 			"name": "获取每日盈亏",
 			"request": {
-				"url": "http://127.0.0.1:8000/portfolio/delt_day_value",
+				"url": "http://47.94.98.165:7510/portfolio/delt_day_value",
 				"method": "POST",
 				"header": [
 					{
@@ -60,8 +60,21 @@
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n\"user id\": \"demo\",\n\"test id\":\"demo\"\n}"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "test id",
+							"value": "demo",
+							"description": "",
+							"type": "text"
+						}
+					]
 				},
 				"description": "获取每日盈亏"
 			},
@@ -70,7 +83,7 @@
 		{
 			"name": "获取概况",
 			"request": {
-				"url": "http://127.0.0.1:8000/summary",
+				"url": "http://47.94.98.165:7510/summary",
 				"method": "POST",
 				"header": [
 					{
@@ -90,9 +103,15 @@
 		{
 			"name": "获取交易情况",
 			"request": {
-				"url": "http://127.0.0.1:8000/trades",
+				"url": "http://47.94.98.165:7510/trades",
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\"user id\": \"demo\",\n\"test id\":\"demo\"\n}"
